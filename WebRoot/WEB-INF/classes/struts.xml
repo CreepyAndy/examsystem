@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+
+<constant value="true" name="struts.devMode"/>
+	<package name="registration" extends="struts-default" namespace="/registration">
+	    <default-action-ref name="index" />
+	    <action name="index">
+			<result>/studentRegister.jsp</result>
+		</action>
+		<action name="student" class="xia.action.StudentAction">
+
+			<result name="success">/registerSuccess.jsp</result>
+			<result name="fail">/registerFail.jsp</result>
+
+		</action>
+	</package>
+	
+	<package name="login" extends="struts-default" namespace="">
+	    <action name="index">
+			<result>welcome.jsp</result>
+		</action>
+		<action name="util" class="xia.action.UtilAction" >
+
+			<result name="student">/WEB-INF/student/index.jsp</result>
+			<result name="teacher">/WEB-INF/teacher/index.jsp</result>
+			<result name="admin">/WEB-INF/admin/index.jsp</result>
+			<result name="fail">/loginFail.jsp</result>
+			<result name="index">/welcome.jsp</result>
+		</action>
+	</package>
+	
+	
+	<package name="student" extends="struts-default" namespace="/student">
+	    <default-action-ref name="index" />
+	    <action name="index">
+			<result>/WEB-INF/student/index.jsp</result>
+		</action>
+		<action name="preExam">
+			<result>/WEB-INF/student/preExam.jsp</result>
+		</action>
+		<action name="preWrongExam">
+			<result>/WEB-INF/student/preWrongExam.jsp</result>
+		</action>
+		<action name="preExersize">
+			<result>/WEB-INF/student/preExersize.jsp</result>
+		</action>
+		<action name="studentInfo">
+			<result>/WEB-INF/student/studentInfo.jsp</result>
+		</action>
+	</package>
+	
+	
+	<package name="admin" extends="struts-default" namespace="/admin">
+	    <default-action-ref name="index" />
+	    <action name="index">
+			<result>/WEB-INF/admin/index.jsp</result>
+		</action>
+		<action name="loadQuestion">
+			<result>/WEB-INF/admin/loadQuestion.jsp</result>
+		</action>
+		<action name="loadReadingQuestion">
+			<result>/WEB-INF/admin/loadReadingQuestion.jsp</result>
+		</action>
+		<action name="list" class="xia.action.AdminAction" method="list">
+			<result>/WEB-INF/admin/list.jsp</result>
+		</action>
+	</package>
+	
+	
+	<package name="questionManager" extends="struts-default" namespace="/questionManager">
+	    <default-action-ref name="index" />
+	    <action name="index">
+			<result>/WEB-INF/admin/index.jsp</result>
+		</action>
+		<action name="admin" class="xia.action.AdminAction">
+
+			<result>/WEB-INF/admin/loadQuestion.jsp</result>
+			<result name="readingSuccess">/WEB-INF/admin/loadReadingQuestion.jsp</result>
+		</action>
+		<action name="del" class="xia.action.AdminAction" method="del">
+
+			<result>/WEB-INF/admin/loadQuestion.jsp</result>
+			<result name="readingSuccess">/WEB-INF/admin/loadReadingQuestion.jsp</result>
+		</action>	
+	</package>
+	
+	<package name="paperManage" extends="struts-default" namespace="/paperManage">
+	    <default-action-ref name="index" />
+	    <action name="index">
+			<result>/WEB-INF/teacher/index.jsp</result>
+		</action>
+		<action name="synPaper_chosen" class="xia.action.AdminAction" method="chosenList">
+			<result>/WEB-INF/teacher/chosenList.jsp</result>
+		</action>
+		<action name="synPaper" class="xia.action.AdminAction" method="listPapers">
+			<result >/WEB-INF/teacher/synPaperIndex.jsp</result>
+		</action>
+		<action name="synPaper_chose" class="xia.action.AdminAction" method="QuestionBankList">
+			<result >/WEB-INF/teacher/QuestionBankList.jsp</result>
+		</action>
+		<action name="synPaper_decide" class="xia.action.AdminAction" method="addToPaper">
+			<result >/WEB-INF/teacher/QuestionBankList.jsp</result>
+		</action>
+		<action name="synPaper_delQuestionInPaper" class="xia.action.AdminAction" method="delQuesionInPaper">
+			<result type="redirectAction">paperManage/synPaper_chosen</result>
+		</action>
+		
+		<action name="synPaper_del" class="xia.action.AdminAction" method="del">
+		   <result  type="redirectAction">/paperManage/synPaper</result>
+			<!--  <result>/WEB-INF/teacher/synPaperIndex.jsp</result>-->
+		</action>
+
+		<action name="synPaper_add" class="xia.action.AdminAction" method="addPaper">
+	     	<result  type="redirectAction">/paperManage/synPaper</result>
+			<!-- <result>/WEB-INF/teacher/chosenList.jsp</result> -->
+		</action>
+		
+	</package>
+
+
+</struts>
+	
